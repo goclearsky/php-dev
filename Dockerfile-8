@@ -1,0 +1,29 @@
+ARG BASE_IMAGE_TAG=8.0
+
+FROM php:${BASE_IMAGE_TAG}-apache
+
+# install composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
+WORKDIR /usr/bin
+RUN ln -s /usr/bin/composer2 /usr/bin/composer
+
+# install libraries and utilities and extensions
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+	git \
+        libicu-dev \
+	libpq-dev \
+	libsqlite3-dev \
+        mariadb-client \
+	sqlite3 \
+        unzip \
+        vim \
+    && apt-get clean \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install -j$(nproc) \
+        intl \
+        pdo_mysql \
+	pdo_pgsql \
+	pdo_sqlite
