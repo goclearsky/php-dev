@@ -27,3 +27,5 @@ RUN apt-get update \
         pdo_mysql \
 	pdo_pgsql \
 	pdo_sqlite
+
+WORKDIR /var/www/html
