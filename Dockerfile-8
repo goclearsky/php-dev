@@ -31,4 +31,6 @@ RUN apt-get update \
 # enable apache modules
 RUN a2enmod rewrite
 
+COPY .bashrc /root/.bashrc
+
 WORKDIR /var/www/html
