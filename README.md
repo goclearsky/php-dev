@@ -1,6 +1,6 @@
-# PHP Apache Dev
+# PHP Dev
 
-Includes both composer v1 and v2, various database pdo's, and other elements required for general dev and test.
+Includes both composer v1 and v2, various database pdo's, and other elements required for CakePHP dev and test.
 
 # Makefile
 
@@ -20,7 +20,7 @@ make [push=true] <version>
 services:
   php71:
     container_name: php71
-    image: goclearsky/php-apache-dev:7.1
+    image: goclearsky/php-dev:7.1-apache
     restart: always
     ports:
       - "7180:80"
