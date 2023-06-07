@@ -28,4 +28,7 @@ RUN apt-get update \
 	pdo_pgsql \
 	pdo_sqlite
 
+# enable apache modules
+RUN a2enmod rewrite
+
 WORKDIR /var/www/html
